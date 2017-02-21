@@ -1,24 +1,30 @@
 {
-  "name": "test",
+  "name": "gui",
   "version": "1.0.0",
-  "description": "This is for study gulp project !",
-  "homepage": "",
+  "description": "一个移动端框架",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp-minify-css": "^1.2.4",
+    "gulp": "^3.9.1",
+    "gulp-uglify": "^2.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-util": "^3.0.8"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
-    "url": "https://git.oschina.net/xxxx"
+    "url": "git+https://github.com/GGwujun/GUI.git"
   },
-  "author": {
-    "name": "surging",
-    "email": "surging2@qq.com"
-  },
+  "author": "大师兄",
   "license": "ISC",
-  "devDependencies": {
-    "gulp": "^3.8.11",
-    "gulp-concat": "^2.6.1",
-    "gulp-jshint": "^2.0.4",
-    "gulp-less": "^3.0.0",
-    "gulp-minify-css": "^1.2.4",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^2.0.1"
-  }
+  "bugs": {
+    "url": "https://github.com/GGwujun/GUI/issues"
+  },
+  "homepage": "https://github.com/GGwujun/GUI#readme"
 }

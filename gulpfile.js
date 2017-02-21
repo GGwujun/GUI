@@ -1,50 +1,55 @@
-var gulp = require('gulp')，
-    minifycss = require('gulp-minify-css')，
-    concat = require('gulp-concat')，
-    uglify = require('gulp-uglify')，
-    rename = require('gulp-rename')，
-    jshint=require('gulp-jshint');
-    //语法检查
-    gulp.task('jshint'， function () {
-        return gulp.src('js/*.js')
-            .pipe(jshint())
-            .pipe(jshint.reporter('default'));
-    });
-    //压缩css
-    gulp.task('minifycss'， function() {
-        return gulp.src('css/*.css')    //需要操作的文件
-            .pipe(rename({suffix: '.min'}))   //rename压缩后的文件名
-            .pipe(minifycss())   //执行压缩
-            .pipe(gulp.dest('Css'));   //输出文件夹
-    });
-    //压缩，合并 js
-    gulp.task('minifyjs'， function() {
-        return gulp.src('js/*.js')      //需要操作的文件
-            .pipe(concat('main.js'))    //合并所有js到main.js
-            .pipe(gulp.dest('js'))       //输出到文件夹
-            .pipe(rename({suffix: '.min'}))   //rename压缩后的文件名
-            .pipe(uglify())    //压缩
-            .pipe(gulp.dest('Js'));  //输出
-    });
-　　//默认命令，在cmd中输入gulp后，执行的就是这个任务(压缩js需要在检查js之后操作)
-    gulp.task('default'，['jshint']，function() {
-        gulp.start('minifycss'，'minifyjs'); 
-　　});
 
-//压缩html
-  var htmlmin = require('gulp-htmlmin');
-  gulp.task('html', function(){
-     gulp.src('./*.html')
-          .pipe(htmlmin({
-            collapseWhitespace: true,
-               removeComments: true
-        }))
-         .pipe(gulp.dest('dist'));
+// 获取 gulp
+var gulp = require('gulp')
+
+// 获取 uglify 模块（用于压缩 JS）
+var uglify = require('gulp-uglify')
+
+// 获取 minify-css 模块（用于压缩 CSS）
+var minifyCSS = require('gulp-minify-css')
+
+var concat = require('gulp-concat')
+
+var rename = require('gulp-rename')
+
+var gutil = require('gulp-util') //让命令行输出的文字带颜色
+
+//压缩，合并 js
+
+gulp.task('script',function() {
+	return gulp.src('src/script/**/*.js')      //需要操作的文件
+		.pipe(concat('main.js'))    //合并所有js到main.js
+		.pipe(gulp.dest('dist/js'))       //输出到文件夹
+		.pipe(rename({suffix: '.min'}))   //rename压缩后的文件名
+		.pipe(uglify())    //压缩
+		.pipe(gulp.dest('dist/js'));  //输出
 });
 
-	//同步代码变化
- gulp.task('dist', function(){
-    gulp.watch('./*.html', ['html']);
-     gulp.watch(['./css/style.css','./css/piano.css'], ['style']);
-     gulp.watch(['./js/common.js','./js/piano.js'], ['script']);
- });
+//压缩，合并 css
+
+gulp.task('css',function() {
+	return gulp.src('src/css/**/*.css')      //需要操作的文件
+		.pipe(concat('main.css'))    //合并所有js到main.js
+		.pipe(gulp.dest('dist/css'))       //输出到文件夹
+		.pipe(rename({suffix: '.min'}))   //rename压缩后的文件名
+		.pipe(minifyCSS())    //压缩
+		.pipe(gulp.dest('dist/css'));  //输出
+});
+
+
+
+
+
+// 在命令行使用 gulp auto 启动此任务
+gulp.task('auto', function () {
+    // 监听文件修改，当文件被修改则执行 script 任务
+    gulp.watch('src/script/**/*.js', ['script'])
+	
+	// 监听文件修改，当文件被修改则执行 script 任务
+    gulp.watch('src/css/**/*.css', ['css'])
+})
+
+//默认命令，在cmd中输入gulp后，执行的就是这个任务(压缩js需要在检查js之后操作)
+gulp.task('default',function() {
+	gulp.start('script','css','auto'); 
+});
