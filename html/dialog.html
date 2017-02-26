@@ -9,7 +9,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 		<!--标准mui.css-->
-		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../dist/css/gui.min.css">
 		<!--App自定义的css-->
 		<!--<link rel="stylesheet" type="text/css" href="../css/app.css" />-->
 		<style>
@@ -40,12 +40,10 @@
 				<div id="info"></div>
 			</div>
 		</div>
-		<script src="../js/mui.min.js"></script>
+		<script src="../dist/js/api.js"></script>
+		<script src="../dist/js/gui.js"></script>
 		<script type="text/javascript" charset="utf-8">
-			//mui初始化
-			mui.init({
-				swipeBack: true //启用右滑关闭功能
-			});
+
 			var info = document.getElementById("info");
 			document.getElementById("alertBtn").addEventListener('tap', function() {
 				mui.alert('欢迎使用Hello MUI', 'Hello MUI', function() {
@@ -62,7 +60,7 @@
 					}
 				})
 			});
-			document.getElementById("promptBtn").addEventListener('tap', function(e) {
+			document.getElementById("promptBtn").addEventListener('click', function(e) {
 				e.detail.gesture.preventDefault(); //修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
 				var btnArray = ['取消', '确定'];
 				mui.prompt('请输入你对MUI的评语：', '性能好', 'Hello MUI', btnArray, function(e) {
@@ -73,9 +71,11 @@
 					}
 				})
 			});
-			document.getElementById("toastBtn").addEventListener('tap', function() {
+			document.getElementById("toastBtn").addEventListener('click', function() {
 				mui.toast('欢迎体验Hello MUI');
 			});
+			
+			
 		</script>
 	</body>
 

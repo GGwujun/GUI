@@ -1,5 +1,4 @@
 (function($, window) {
-	var CLASS_ACTIVE = $.className('active');
 	/**
 	 * 自动消失提示框
 	 */
