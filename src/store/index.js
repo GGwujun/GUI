@@ -11,14 +11,14 @@ const store = new Vuex.Store({
       avatarUrl: null,
       id: null,
       loginname: '',
-      accessToken: ''
+      loginid: ''
     },
     direction: 'forward',
     isAgainLoading: false
   },
 
   actions: {
-    FETCH_LOADING: ({commit, state}) => {
+    FETCH_LOADING: ({ commit, state }) => {
       return state.loading
     }
   },
@@ -45,22 +45,22 @@ const store = new Vuex.Store({
   },
 
   getters: {
-    loading (state, getters) {
+    loading(state, getters) {
       return state.loading
     },
-    isShowTabbar (state, getters) {
+    isShowTabbar(state, getters) {
       return state.isShowTabbar
     },
-    accessToken (state, getters) {
-      return state.loginInfo.accessToken
+    accessToken(state, getters) {
+      return state.loginInfo.loginid
     },
-    loginInfo (state, getters) {
+    loginInfo(state, getters) {
       return state.loginInfo
     },
-    direction (state, getters) {
+    direction(state, getters) {
       return state.direction
     },
-    isAgainLoading (state, getters) {
+    isAgainLoading(state, getters) {
       return state.isAgainLoading
     }
   }

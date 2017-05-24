@@ -4,15 +4,15 @@ import store from './store'
 import axios from './components/plugins/axios'
 import VueLazyload from 'vue-lazyload'
 import App from './App.vue'
-import {Tabbar, TabbarItem} from './components/vux/tabbar'
+import { Tabbar, TabbarItem } from './components/vux/tabbar'
 import * as filters from './filters'
 import XInput from './components/vux/x-input'
 import XTextarea from './components/vux/x-textarea'
 import Selector from './components/vux/selector'
 import Group from './components/vux/group'
 import XButton from './components/vux/x-button'
-import {Flexbox, FlexboxItem} from './components/vux/flexbox'
-import {Tab, TabItem} from './components/vux/tab'
+import { Flexbox, FlexboxItem } from './components/vux/flexbox'
+import { Tab, TabItem } from './components/vux/tab'
 import Scroller from './components/vux/scroller'
 import Spinner from './components/vux/spinner'
 import Popup from './components/vux/popup'
@@ -45,28 +45,30 @@ Vue.component('Spinner', Spinner)
 Vue.component('Popup', Popup)
 
 // 是否有已登录过的记录，localStorage
-let accessToken = localStorage.getItem('accessToken')
+let accessToken = localStorage.getItem('loginid');
+let password = localStorage.getItem('password');
+
 if (!accessToken || accessToken === 'null') {
   store.commit('SET_ACCESSTOKEN', null)
 } else {
   // 本地localStorage已储存好accessToken
-  Vue.$axios.post('/accesstoken', {
-    accesstoken: accessToken
+  Vue.$axios.post('/User/login', {
+    loginid: accessToken,
+    password: password
   })
     .then(result => {
-      console.log(result)
+      result = result.data;
       store.commit('SET_LOGININFO', {
         avatarUrl: result.data.avatar_url,
         id: result.data.id,
-        loginname: result.data.loginname,
-        accessToken: accessToken
+        loginname: result.data.username,
+        loginid: result.data.loginid
       })
     })
     .catch(e => {
-      console.log(e)
-      localStorage.setItem('accessToken', null)
+      localStorage.setItem('loginid', null)
       Vue.$vux.toast.show({
-        text: 'AccessToken错误'
+        text: '账号错误'
       })
     })
 }
@@ -106,7 +108,7 @@ router.beforeEach((to, from, next) => {
   // 判断当前路由标签是否需要登录后权限
   if (to.meta.auth) {
     // 需要登录
-    let accessToken = localStorage.getItem('accessToken')
+    let accessToken = localStorage.getItem('loginid')
     if (accessToken === 'null' || accessToken === null) {
       // 未登录
       next({

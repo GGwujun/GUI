@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 const ArticleList = resolve => require(['../views/ArticleList'], resolve)
 const ArticleDetail = resolve => require(['../views/ArticleDetail'], resolve)
-const ArticleCreate = resolve => require(['../views/ArticleCreate'], resolve)
+// const ArticleCreate = resolve => require(['../views/ArticleCreate'], resolve)
 const Message = resolve => require(['../views/Message'], resolve)
 const User = resolve => require(['../views/User'], resolve)
 const Login = resolve => require(['../views/Login'], resolve)
@@ -47,11 +47,6 @@ export default new Router({
       meta: {
         scrollToTop: true
       }
-    },
-    {
-      path: '/create',
-      name: 'create',
-      component: ArticleCreate
     },
     {
       path: '/message',

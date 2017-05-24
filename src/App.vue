@@ -14,10 +14,10 @@
                 <i slot="icon" class="icon-edit"></i>
                 <span slot="label" v-text="'发布'"></span>
               </tabbar-item>-->
-      <tabbar-item :selected="$route.name === 'message'" link="/message">
+      <!--<tabbar-item :selected="$route.name === 'message'" link="/message">
         <i slot="icon" class="icon-comment"></i>
         <span slot="label" v-text="'消息'"></span>
-      </tabbar-item>
+      </tabbar-item>-->
       <tabbar-item :selected="$route.name === 'me'" link="/me">
         <i slot="icon" class="icon-user"></i>
         <span slot="label" v-text="'我的'"></span>

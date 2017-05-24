@@ -47,9 +47,9 @@ export function translateTab (tab, isTop) {
     return '置顶'
   } else {
     switch (tab) {
-      case 'share':
-        return '分享'
-      case 'ask':
+      case 'html':
+        return 'html'
+      case 'css':
         return '问答'
       case 'job':
         return '招聘'
